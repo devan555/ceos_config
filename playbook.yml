@@ -4,3 +4,4 @@
   gather_facts: yes
   tasks:
    - debug: msg="{{ ansible_facts }}"
+   - debug: msg="Hello"
