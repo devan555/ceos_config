@@ -15,8 +15,14 @@
      ignore_errors: true
    
    - debug: msg="{{ destroy_out }}"
-   
+   - name: Wait for 5 sec
+     wait_for:
+       timeout: 5
+
    - name: Delete container file
-     local_action: command sudo rm -rf containerlab_test/clab-ceos_simple/
+     local_action: command sudo rm -rf containerlab_test/clab-ceos_simple
      become: yes
      ignore_errors: true
+     register: delete_dir
+
+   - debug: msg="{ delete_dir }"
