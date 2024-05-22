@@ -11,3 +11,7 @@ jobs:
       - run: echo "REPO_NAME=${{ github.event.repository.name }}"
       - run: whoami
       - run: ansible-playbook ~/clab_files/ansible_files/01_run_clab.yml -i containerlab_test/ansible-inventory.yml
+      
+      - name: Destroy the Containerlab
+        if: always()
+        run: ansible-playbook ~/clab_files/ansible_files/02_destroy_clab.yml
