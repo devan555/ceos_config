@@ -8,6 +8,8 @@
         commands: show vlan
       register: vlan_output
 
+    - name: Print output
+      debug: msg="{{ vlan_output.stdout[0] }}"
     - name: Check if specific VLAN is present
       set_fact:
         vlan_present: "{{ 'VLAN0010' in vlan_output.stdout[0] }}"
