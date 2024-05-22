@@ -1,0 +1,6 @@
+---
+- name: cEOS Config
+  hosts: ceos
+  gather_facts: yes
+  tasks:
+   - debug: msg="{{ ansible_facts }}"
