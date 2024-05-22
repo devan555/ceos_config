@@ -18,3 +18,5 @@
    
    - name: Delete container file
      local_action: command sudo rm -rf containerlab_test/clab-ceos_simple/
+     become: yes
+     ignore_errors: true
