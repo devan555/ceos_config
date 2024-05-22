@@ -3,5 +3,27 @@
   hosts: ceos
   gather_facts: yes
   tasks:
-   - debug1: msg="{{ ansible_facts }}"
-   - debug: msg="Hello"
+   - name: Print Device Facts
+     debug:
+       msg: "{{ ansible_facts }}"
+       
+   - name: Configure VLAN
+     arista.eos.eos_vlans:
+       config:
+        - vlan_id: 10
+          name: LAN_USER
+          state: active
+     register: vlan_conf
+     
+   - name: Print VLAN Conf output
+     ansible.builtin.debug:
+       msg: "{{ vlan_conf }}"
+       
+   - name: Gather VLAN config
+     arista.eos.eos_vlans:
+       state: gathered
+     register: gathered_vlan
+     
+   - name: Print Gathered VLAN
+     ansible.builtin.debug:
+       msg: "{{ gathered_vlan }}"
