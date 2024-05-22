@@ -10,7 +10,7 @@
 
     - name: Check if specific VLAN is present
       set_fact:
-        vlan_present: "{{ 'VLAN 100' in vlan_output.stdout[0] }}"
+        vlan_present: "{{ 'VLAN 10' in vlan_output.stdout[0] }}"
 
     - name: Fail if VLAN is not present
       fail:
