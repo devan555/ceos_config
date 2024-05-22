@@ -3,5 +3,5 @@
   hosts: ceos
   gather_facts: yes
   tasks:
-   - debug: msg="{{ ansible_facts }}"
+   - debug1: msg="{{ ansible_facts }}"
    - debug: msg="Hello"
