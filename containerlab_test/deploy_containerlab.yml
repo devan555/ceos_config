@@ -1,0 +1,30 @@
+---
+- name: Run CLAB
+  hosts: localhost
+  become: yes
+  become_method: sudo
+  gather_facts: false
+  vars:
+    ansible_become_password: password
+    topology_file: /home/user1/actions-runner/_work/ceos_config/ceos_config/containerlab_test/topology.clab.yaml --reconfigure
+  tasks:
+  
+   - name: Execute deploy
+     local_action: command sudo containerlab deploy --topo {{ topology_file }}
+     become: yes
+     register: deploy_out
+   
+   - debug: msg="{{ deploy_out.stdout_lines }}"
+ 
+   - name: Wait for device01 to bootup
+     ansible.builtin.wait_for:
+       port: 23001
+       delay: 10
+       
+   - name: Wait for device02 to bootup
+     ansible.builtin.wait_for:
+       port: 23002
+       delay: 10
+     
+- name: Import cEOS Playbook
+  ansible.builtin.import_playbook: "/home/user1/actions-runner/_work/ceos_config/ceos_config/playbook.yml"
