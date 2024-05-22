@@ -26,3 +26,8 @@
      register: delete_dir
 
    - debug: msg="{{ delete_dir }}"
+
+   - name: Delete dir
+     file:
+       path: containerlab_test/clab-ceos_simple
+       state: absent
