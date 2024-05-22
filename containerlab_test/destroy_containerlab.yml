@@ -20,9 +20,9 @@
        timeout: 5
 
    - name: Delete container file
-     local_action: command sudo rm -rf containerlab_test/clab-ceos_simple
+     local_action: command sudo rm -rf containerlab_test/clab-ceos_simple/
      become: yes
      ignore_errors: true
      register: delete_dir
 
-   - debug: msg="{ delete_dir }"
+   - debug: msg="{{ delete_dir }}"
