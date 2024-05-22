@@ -1,0 +1,23 @@
+---
+- name: cEOS Config
+  hosts: ceos
+  gather_facts: yes
+  tasks:
+    - name: Retrieve VLAN configuration
+      eos_command:
+        commands: show vlan
+      register: vlan_output
+
+    - name: Check if specific VLAN is present
+      set_fact:
+        vlan_present: "{{ 'VLAN 100' in vlan_output.stdout[0] }}"
+
+    - name: Fail if VLAN is not present
+      fail:
+        msg: "VLAN 10 is not present on the switch."
+      when: not vlan_present
+
+    - name: Debug message if VLAN is present
+      debug:
+        msg: "VLAN 10 is present on the switch."
+      when: vlan_present
