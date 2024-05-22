@@ -1,7 +1,7 @@
 ---
 - name: cEOS Config
   hosts: ceos
-  gather_facts: yes
+  gather_facts: no
   tasks:
     - name: Retrieve VLAN configuration
       eos_command:
@@ -10,7 +10,7 @@
 
     - name: Check if specific VLAN is present
       set_fact:
-        vlan_present: "{{ 'VLAN 10' in vlan_output.stdout[0] }}"
+        vlan_present: "{{ 'VLAN0010' in vlan_output.stdout[0] }}"
 
     - name: Fail if VLAN is not present
       fail:
