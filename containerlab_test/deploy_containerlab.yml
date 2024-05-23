@@ -5,8 +5,8 @@
   become_method: sudo
   gather_facts: false
   vars:
-    ansible_become_password: password
-    topology_file: /home/user1/actions-runner/_work/ceos_config/ceos_config/containerlab_test/topology.clab.yaml --reconfigure
+    ansible_become_password: Cisco
+    topology_file: /home/user/actions-runner/_work/ceos_config/ceos_config/containerlab_test/topology.clab.yaml --reconfigure
   tasks:
   
    - name: Execute deploy
@@ -27,4 +27,4 @@
        delay: 15
      
 - name: Import cEOS Playbook
-  ansible.builtin.import_playbook: "/home/user1/actions-runner/_work/ceos_config/ceos_config/playbook.yml"
+  ansible.builtin.import_playbook: "/home/user/actions-runner/_work/ceos_config/ceos_config/playbook.yml"

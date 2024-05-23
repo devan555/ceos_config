@@ -5,8 +5,8 @@
   become_method: sudo
   gather_facts: false
   vars:
-    ansible_become_password: password
-    topology_file: /home/user1/actions-runner/_work/ceos_config/ceos_config/containerlab_test/topology.clab.yaml
+    ansible_become_password: Cisco
+    topology_file: /home/user/actions-runner/_work/ceos_config/ceos_config/containerlab_test/topology.clab.yaml
   tasks:   
    - name: Execute destroy
      local_action: command sudo containerlab destroy --topo {{ topology_file }}
@@ -20,7 +20,7 @@
        timeout: 5
 
    - name: Delete container file
-     local_action: command sudo rm -rf /home/user1/actions-runner/_work/ceos_config/ceos_config/containerlab_test/clab-ceos_simple/
+     local_action: command sudo rm -rf /home/user/actions-runner/_work/ceos_config/ceos_config/containerlab_test/clab-ceos_simple/
      become: yes
      ignore_errors: true
      register: delete_dir
