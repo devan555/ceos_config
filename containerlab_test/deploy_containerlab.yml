@@ -19,12 +19,12 @@
    - name: Wait for device01 to bootup
      ansible.builtin.wait_for:
        port: 23001
-       delay: 10
+       delay: 15
        
    - name: Wait for device02 to bootup
      ansible.builtin.wait_for:
        port: 23002
-       delay: 10
+       delay: 15
      
 - name: Import cEOS Playbook
   ansible.builtin.import_playbook: "/home/user1/actions-runner/_work/ceos_config/ceos_config/playbook.yml"
