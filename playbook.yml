@@ -7,7 +7,7 @@
      debug:
        msg: "{{ ansible_facts }}"
        
-   - name: Configure VLAN
+   - name: Configure VLAN 10
      arista.eos.eos_vlans:
        config:
         - vlan_id: 10
