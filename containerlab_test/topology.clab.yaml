@@ -1,0 +1,16 @@
+name: ceos_simple
+topology:
+  nodes:
+    ceos1:
+      kind: ceos
+      image: ceos:4.30.5M
+      ports:
+        - 23001:22
+    ceos2: 
+      kind: ceos
+      image: ceos:4.30.5M
+      ports:
+        - 23002:22
+
+  links:
+    - endpoints: ["ceos1:eth1", "ceos2:eth1"]

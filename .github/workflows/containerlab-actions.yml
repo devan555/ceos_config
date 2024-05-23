@@ -1,0 +1,19 @@
+name: Containerlab test case execution
+run-name: ${{ github.actor }} is running the Containerlab Action
+on: [push]
+jobs:
+  containerlab-testcase-execution:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      # - run: echo "REPO_NAME=${{ github.event.repository.name }}"
+
+      - name: Deploy devices in Containerlab and run the Playbook
+        run: ansible-playbook containerlab_test/deploy_containerlab.yml -i containerlab_test/ansible-inventory.yml
+
+      - name: Run the testcase1 on the Containerlab Devices
+        run: ansible-playbook containerlab_test/test_case1.yml -i containerlab_test/ansible-inventory.yml
+
+      - name: Destroy the Containerlab
+        if: always()
+        run: ansible-playbook containerlab_test/destroy_containerlab.yml

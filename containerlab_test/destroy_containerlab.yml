@@ -1,0 +1,33 @@
+---
+- name: Run CLAB
+  hosts: localhost
+  become: yes
+  become_method: sudo
+  gather_facts: false
+  vars:
+    ansible_become_password: password
+    topology_file: /home/user1/actions-runner/_work/ceos_config/ceos_config/containerlab_test/topology.clab.yaml
+  tasks:   
+   - name: Execute destroy
+     local_action: command sudo containerlab destroy --topo {{ topology_file }}
+     become: yes
+     register: destroy_out
+     ignore_errors: true
+   
+   - debug: msg="{{ destroy_out }}"
+   - name: Wait for 5 sec
+     wait_for:
+       timeout: 5
+
+   - name: Delete container file
+     local_action: command sudo rm -rf /home/user1/actions-runner/_work/ceos_config/ceos_config/containerlab_test/clab-ceos_simple/
+     become: yes
+     ignore_errors: true
+     register: delete_dir
+
+  #  - debug: msg="{{ delete_dir }}"
+
+  #  - name: Delete dir
+  #    file:
+  #      path: containerlab_test/clab-ceos_simple
+  #      state: absent
